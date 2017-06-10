@@ -29,13 +29,6 @@
       color: #ff0000;
     }
 
-    #container {
-      height: 600px;
-      width: 600px;
-      box-shadow: 5px 5px 16px 0px rgba(171,171,171,0.82);
-      margin-top: 100px;
-    }
-
     .pixel {
       height: 10%;
       width: 10%;
@@ -46,32 +39,45 @@
       margin-top: 80px;
     }
 
+    canvas{
+      margin-top: 100px;
+      box-shadow: 5px 5px 16px 0px rgba(171,171,171,0.82);
+    }
+
   </style>
 </head>
 
 <body>
   <center><a onClick="colorPixels()">random <span>ART</span></a>
 
-  <div id="container">
-  </div></center>
+  <div id="container"><canvas id="canvas" width="600" height="600"></canvas></div>
+</center>
+
+
 
   <script>
-  var container = document.getElementById("container");
+  var c=document.getElementById("canvas");
+  var ctx=c.getContext("2d");
+  ctx.clearRect(0, 0, c.width, c.height);
+  var pixelSize = 60; //this will the the height and the width of each pixel
 
   function colorPixels(){
-    var pixels = document.getElementsByClassName("pixel");
-    for(var i = 0; i < pixels.length; i++){
-      var color ='#'+ Math.random().toString(16).slice(-6);
-      pixels[i].style.backgroundColor = color;
+    var x = 0;
+    var y = 0;
+    ctx.clearRect(0, 0, c.width, c.height);
+    for(var i = 0; i < c.height/pixelSize*c.height/pixelSize; i++){
+      ctx.fillStyle = '#'+ Math.random().toString(16).slice(-6);
+      ctx.fillRect(x,y,pixelSize,pixelSize);
+      if(x == c.width-pixelSize){
+        x = 0;
+        y += pixelSize;
+      }
+      else{
+        x += pixelSize;
+      }
     }
   }
-
-  window.onload = function() {
-    for(var i = 0; i < 100; i++){
-      container.innerHTML += "<div class='pixel'></div>";
-    }
-  };
-
+  
   </script>
 </body>
 
