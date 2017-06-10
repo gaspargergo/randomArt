@@ -76,7 +76,7 @@
 
   <div id="sizeMenu">
     <a onClick="changePixelSize('-')">-</a>
-    <span id="sizeNumber">60</span>
+    <span id="sizeNumber">100</span>
     <a onClick="changePixelSize('+')">+</a>
   </div>
 </center>
@@ -87,15 +87,15 @@
   var c=document.getElementById("canvas");
   var ctx=c.getContext("2d");
   ctx.clearRect(0, 0, c.width, c.height);
-  var pixelSize = 60; //this will the the height and the width of each pixel
-  var sizes = [1,2,3,6,10,20,30,60,120,200,300,600];
-  var pixelArrayCounter = 6;
+  var pixelSize = 100; //this will the the height and the width of each pixel
+  var sizes = [1,4,9,25,100,400,900,3600,10000,40000,90000,360000];
+  var pixelArrayCounter = 4;
 
   function colorPixels(){
     var x = 0;
     var y = 0;
     ctx.clearRect(0, 0, c.width, c.height);
-    for(var i = 0; i < c.height/pixelSize*c.height/pixelSize; i++){
+    for(var i = 0; i < sizes[pixelArrayCounter]; i++){
       ctx.fillStyle = '#'+ Math.random().toString(16).slice(-6);
       ctx.fillRect(x,y,pixelSize,pixelSize);
       if(x == c.width-pixelSize){
@@ -115,7 +115,7 @@
     else if(param == "-" && pixelArrayCounter != 0){
       pixelArrayCounter -= 1;
     }
-    pixelSize = sizes[pixelArrayCounter];
+    pixelSize = c.height/(Math.sqrt(sizes[pixelArrayCounter]));
     document.getElementById("sizeNumber").innerHTML = sizes[pixelArrayCounter];
   }
   
