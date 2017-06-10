@@ -1,0 +1,79 @@
+<!doctype HTML>
+<html>
+
+<head>
+  <title>randomArt</title>
+  <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+
+  <style>
+    a {
+      font-family: Shrikhand, cursive;
+      font-size: 50px;
+      color: black;
+      letter-spacing: 3px;
+      margin-top: 1000px;
+      margin-bottom: 50px;
+      transition: all 0.5s ease-in-out;
+    }
+
+    span{
+      transition: all 0.5s ease-in-out;
+    }
+
+    a:hover{
+      color: #ffc107;
+      cursor: pointer;
+    }
+
+    a:hover span{
+      color: #ff0000;
+    }
+
+    #container {
+      height: 600px;
+      width: 500px;
+      box-shadow: 5px 5px 16px 0px rgba(171,171,171,0.82);
+      margin-top: 100px;
+    }
+
+    .pixel {
+      height: 20px;
+      width: 20px;
+      float: left;
+    }
+
+    center{
+      margin-top: 80px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <center><a onClick="colorPixels()">random <span>ART</span></a>
+
+  <div id="container">
+  </div></center>
+
+  <script>
+  var container = document.getElementById("container");
+
+  function colorPixels(){
+    var pixels = document.getElementsByClassName("pixel");
+    for(var i = 0; i < pixels.length; i++){
+      var color ='#'+ Math.random().toString(16).slice(-6);
+      pixels[i].style.backgroundColor = color;
+    }
+  }
+
+  window.onload = function() {
+    for(var i = 0; i < 750; i++){
+      var color ='#'+ Math.random().toString(16).slice(-6);
+      container.innerHTML += "<div class='pixel'></div>";
+    }
+  };
+
+  </script>
+</body>
+
+</html>
