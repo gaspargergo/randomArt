@@ -6,7 +6,7 @@
   <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
 
   <style>
-    a {
+    #title {
       font-family: Shrikhand, cursive;
       font-size: 50px;
       color: black;
@@ -21,18 +21,15 @@
     }
 
     a:hover{
-      color: #ffc107;
       cursor: pointer;
     }
 
-    a:hover span{
-      color: #ff0000;
+    #title:hover{
+      color: #ffc107;
     }
 
-    .pixel {
-      height: 10%;
-      width: 10%;
-      float: left;
+    #title:hover span{
+      color: #ff0000;
     }
 
     center{
@@ -44,13 +41,44 @@
       box-shadow: 5px 5px 16px 0px rgba(171,171,171,0.82);
     }
 
+    #sizeMenu{
+      margin-top: 30px;
+      height: 60px;
+      width: 200px;
+      vertical-align: center;
+      line-height: 60px;
+      font-size: 30px;
+      font-family: Shrikhand, cursive;
+      opacity: 0.1;
+      transition: all 0.5s ease-in-out;
+    }
+
+    #sizeMenu a{
+      opacity: 0.05;
+      transition: all 0.5s ease-in-out;
+    }
+
+    #sizeMenu:hover{
+      opacity: 0.8;
+    }
+
+    #sizeMenu:hover a{
+      opacity: 0.8;
+    }
+
   </style>
 </head>
 
 <body>
-  <center><a onClick="colorPixels()">random <span>ART</span></a>
+  <center><a id="title" onClick="colorPixels()">random <span>ART</span></a>
 
   <div id="container"><canvas id="canvas" width="600" height="600"></canvas></div>
+
+  <div id="sizeMenu">
+    <a onClick="changePixelSize('-')">-</a>
+    <span id="sizeNumber">60</span>
+    <a onClick="changePixelSize('+')">+</a>
+  </div>
 </center>
 
 
@@ -60,6 +88,8 @@
   var ctx=c.getContext("2d");
   ctx.clearRect(0, 0, c.width, c.height);
   var pixelSize = 60; //this will the the height and the width of each pixel
+  var sizes = [2,3,6,10,20,30,60,120,200,300];
+  var pixelArrayCounter = 6;
 
   function colorPixels(){
     var x = 0;
@@ -76,6 +106,17 @@
         x += pixelSize;
       }
     }
+  }
+
+  function changePixelSize(param){
+    if(param == "+" && pixelArrayCounter != sizes.length-1){
+      pixelArrayCounter += 1;
+    }
+    else if(param == "-" && pixelArrayCounter != 0){
+      pixelArrayCounter -= 1;
+    }
+    pixelSize = sizes[pixelArrayCounter];
+    document.getElementById("sizeNumber").innerHTML = sizes[pixelArrayCounter];
   }
   
   </script>
