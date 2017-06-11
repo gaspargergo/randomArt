@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>randomArt</title>
+  <title>instant Art</title>
   <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
 
   <style>
@@ -70,9 +70,9 @@
 </head>
 
 <body>
-  <center><a id="title" onClick="colorPixels()">random <span>ART</span></a>
+  <center><a id="title" onClick="colorPixels()">instant <span>ART</span></a>
 
-  <div id="container"><canvas id="canvas" width="600" height="600"></canvas></div>
+  <div id="container"><canvas id="canvas" height="600px" width="600px"></canvas></div>
 
   <div id="sizeMenu">
     <a onClick="changePixelSize('-')">-</a>
@@ -87,9 +87,9 @@
   var c=document.getElementById("canvas");
   var ctx=c.getContext("2d");
   ctx.clearRect(0, 0, c.width, c.height);
-  var pixelSize = 100; //NOW WRITES THE NUMBER OF PIXELS INSTEAD OF THE SIZE
   var sizes = [1,4,9,25,100,400,900,3600,10000,40000,90000,360000]; 
   var pixelArrayCounter = 4;
+  var pixelSize = c.height/(Math.sqrt(sizes[pixelArrayCounter]));
 
   function colorPixels(){
     var x = 0;
