@@ -74,6 +74,11 @@
       margin-left: 300px;
       margin-top: -20px;
       transform: rotate(-20deg);
+      transition: all 0.5s ease-in-out;
+    }
+
+    #text:hover{
+      transform: rotate(-25deg);
     }
 
   </style>
@@ -81,7 +86,7 @@
 
 <body>
   <center><a id="title" onClick="colorPixels()">instant <span>ART</span></a>
-    <p id="text">Just add water!</p>
+    <a onClick="drawEasterEgg()"><p id="text">Just add water!</p></a>
 
   <div id="container"><canvas id="canvas" height="600px" width="600px"></canvas></div>
 
@@ -96,12 +101,6 @@
 
   <script>
 
-  document.addEventListener('mousedown', function (event) {
-    if (event.detail > 1) {
-      event.preventDefault();
-      }
-    }, false);
-  
   var c=document.getElementById("canvas");
   var ctx=c.getContext("2d");
   ctx.clearRect(0, 0, c.width, c.height);
@@ -137,6 +136,64 @@
     document.getElementById("sizeNumber").innerHTML = sizes[pixelArrayCounter];
   }
   
+  function drawEasterEgg(){
+    var x = 0;
+    var y = 0;
+    var code ="000000000000000000000000000000000000000000000000000000000000003333333304444444406666666600003333333304444444406666666600003311113304433334406688886600003313313304434434406686686600003313313304434434406686686600003311113304433334406688886600003333333304444444406666666600003333333304444444406666666600000000000000000000000000000000002222222205555555507777777700002222222205555555507777777700002211112205533335507788887700002212212205535535507787787700002212212205535535507787787700002211112205533335507788887700002222222205555555507777777700002222222205555555507777777700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+
+    ctx.clearRect(0, 0, c.width, c.height);
+    var pixelSize = Math.round(c.height/(Math.sqrt(code.length)));
+    for(var i = 0; i < code.length; i++){
+      switch(code[i]){
+        case '0':
+          ctx.fillStyle = "#ffffff";
+          break;
+
+        case '1':
+          ctx.fillStyle = "#585baa"; //purple
+          break;
+
+        case '2':
+          ctx.fillStyle = "#6d5f44"; //brown
+          break;
+
+        case '3':
+          ctx.fillStyle = "#fd0e23"; //red
+          break;
+
+        case '4':
+          ctx.fillStyle = "#9ac635"; //light green
+          break;
+
+        case '5':
+          ctx.fillStyle = "#f95808"; //orange
+          break;
+
+        case '6':
+          ctx.fillStyle = "#fe7eb7"; //pink
+          break;
+
+        case '7':
+          ctx.fillStyle = "#6b4eaa"; //deep purple
+          break;
+
+        case '8':
+          ctx.fillStyle = "#fed600"; //yellow
+          break;
+      }
+      console.log("doing it!! " + ctx.fillStyle);
+      ctx.fillRect(x,y,pixelSize,pixelSize);
+      if(x == c.width-pixelSize){
+        x = 0;
+        y += pixelSize;
+      }
+      else{
+        x += pixelSize;
+      }
+    }
+  }
+
+
   </script>
 </body>
 
