@@ -101,6 +101,12 @@
 
   <script>
 
+  document.addEventListener('mousedown', function (event) {
+    if (event.detail > 1) {
+      event.preventDefault();
+      }
+    }, false);
+
   var c=document.getElementById("canvas");
   var ctx=c.getContext("2d");
   ctx.clearRect(0, 0, c.width, c.height);
@@ -181,7 +187,6 @@
           ctx.fillStyle = "#fed600"; //yellow
           break;
       }
-      console.log("doing it!! " + ctx.fillStyle);
       ctx.fillRect(x,y,pixelSize,pixelSize);
       if(x == c.width-pixelSize){
         x = 0;
